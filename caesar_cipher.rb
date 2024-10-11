@@ -1,30 +1,44 @@
-# def caeser_chiper(string, shift_factor)
-#   msg = string.chars.map do |char|  
-#     if char.between?('A','Z') || char.between?('a', 'z') # check if the charecter upcase or downcase
-#       # base = char[0]
-#       base = char.between?('A', 'Z') ? 'A'[0] : 'a'[0]  # Get ASCII base without ord
-#       # ((char[0] - base + shift_factor) % 26 + base).chr
-#       ((char[0] - base + shift_factor) % 26 + base).chr
-#       puts "#{char}"
-#     else
-#       puts ("type error")
-#     end
-#   end
-# end
+def split_string(string)
+  result = string.chars
+  return result
+ end
 
-def caesar_cipher(string, shift)
-  result = string.chars.map do |char|
-    if char.between?('A', 'Z') || char.between?('a', 'z')
-      base = char.between?('A', 'Z') ? 65 : 97  # Use numeric base directly (65 for 'A', 97 for 'a')
-      ((char[0].ord - base + shift) % 26 + base).chr
-    else
-      char  # Non-alphabetical characters remain unchanged
-    end
+# result = split_string('abc')
+# puts"#{result}"
+
+ def caesar_cipher(method_split_string, shift_key)
+  result = method_split_string.map do |str| str.downcase
+  if str.between?('a', 'z') || str.between?('A', 'Z')
+    base = 'a'.ord
+    # base = str.between?('a', 'z') ? 'a'.ord : 'A'.ord  # Handle both lowercase and uppercase letters
+    ((str.ord - base + shift_key) % 26 + base).chr
+  else
+    str
   end
-
-  result.join  # Join the array of characters back into a string
-  puts "#{result}"
 end
 
+  result.join
+end
 
-caesar_cipher("abc", 2)
+# # Call caesar_cipher with a shifted key
+# shifted_result = caesar_cipher(split_string('abc'), 1)
+# puts shifted_result
+
+
+class String
+  def caesar_cipher(shift_key)
+    result = self.chars.map do |str| str.downcase
+    if str.between?('a', 'z') || str.between?('A', 'Z')
+      base = 'a'.ord
+      # base = str.between?('a', 'z') ? 'a'.ord : 'A'.ord  # Handle both lowercase and uppercase letters
+      ((str.ord - base + shift_key) % 26 + base).chr
+    else
+      str
+    end
+  end
+  result.join
+  end
+end
+
+puts "What a string!".caesar_cipher(1)
+
